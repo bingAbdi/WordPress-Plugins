@@ -101,7 +101,7 @@ function emage_render_settings_page() {
     $emage_watermark_opacity = get_option('emage_watermark_opacity', 50);
 
     // Render the settings page HTML
-    ?>
+ 
     <div class="wrap">
         <h1>Emage Settings</h1>
         <form method="post" action="" enctype="multipart/form-data">
@@ -132,4 +132,45 @@ function emage_render_settings_page() {
                     <th scope="row">Lock Aspect Ratio</th>
                     <td>
                         <label for="emage_aspect_ratio_lock">
-                            <input type="checkbox" name="emage
+                            <input type="checkbox" name="emage                   _aspect_ratio_lock" value="1"<?php checked($emage_aspect_ratio_lock, 1); ?>> Enable
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Watermark Image</th>
+                    <td>
+                        <input type="file" name="emage_watermark_image">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Watermark Position</th>
+                    <td>
+                        <select name="emage_watermark_position">
+                            <option value="top-left"<?php selected($emage_watermark_position, 'top-left'); ?>>Top Left</option>
+                            <option value="top-right"<?php selected($emage_watermark_position, 'top-right'); ?>>Top Right</option>
+                            <option value="bottom-left"<?php selected($emage_watermark_position, 'bottom-left'); ?>>Bottom Left</option>
+                            <option value="bottom-right"<?php selected($emage_watermark_position, 'bottom-right'); ?>>Bottom Right</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Watermark Opacity</th>
+                    <td>
+                        <input type="range" name="emage_watermark_opacity" min="0" max="100" value="<?php echo $emage_watermark_opacity; ?>">
+                    </td>
+                </tr>
+            </table>
+            <p class="submit">
+                <input type="submit" name="emage_save_settings" class="button-primary" value="Save Settings">
+            </p>
+        </form>
+    </div>
+    <?php
+}
+
+// Add the configuration page to the admin menu
+function emage_add_settings_page() {
+    add_options_page('Emage Settings', 'Emage', 'manage_options', 'emage-settings', 'emage_render_settings_page');
+}
+add_action('admin_menu', 'emage_add_settings_page');
+
