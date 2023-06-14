@@ -1,4 +1,4 @@
-<php 
+<?php
     
 /*
 Plugin Name: EmageOptimize 
@@ -70,9 +70,9 @@ function emage_render_settings_page() {
         // Perform validation and save settings here
         $emage_option = isset($_POST['emage_option']) ? sanitize_text_field($_POST['emage_option']) : '';
         $emage_format = isset($_POST['emage_format']) ? sanitize_text_field($_POST['emage_format']) : '';
-        $emage_compression = isset($_POST['emage_compression']) ? absint($_POST['emage_compression']) : 
+        $emage_compression = isset($_POST['emage_compression']) ? absint($_POST['emage_compression']) : 90;
 
-90; // Default compression level
+ // Default compression level
         $emage_aspect_ratio_lock = isset($_POST['emage_aspect_ratio_lock']) && $_POST['emage_aspect_ratio_lock'] === '1' ? 1 : 0;
         $emage_watermark_image = isset($_POST['emage_watermark_image']) ? sanitize_text_field($_POST['emage_watermark_image']) : '';
         $emage_watermark_position = isset($_POST['emage_watermark_position']) ? sanitize_text_field($_POST['emage_watermark_position']) : 'bottom-right';
@@ -101,7 +101,7 @@ function emage_render_settings_page() {
     $emage_watermark_opacity = get_option('emage_watermark_opacity', 50);
 
     // Render the settings page HTML
- 
+
     <div class="wrap">
         <h1>Emage Settings</h1>
         <form method="post" action="" enctype="multipart/form-data">
@@ -132,7 +132,7 @@ function emage_render_settings_page() {
                     <th scope="row">Lock Aspect Ratio</th>
                     <td>
                         <label for="emage_aspect_ratio_lock">
-                            <input type="checkbox" name="emage                   _aspect_ratio_lock" value="1"<?php checked($emage_aspect_ratio_lock, 1); ?>> Enable
+                            <input type="checkbox" name="emage_aspect_ratio_lock" value="1"<?php checked($emage_aspect_ratio_lock, 1); ?>> Enable
                         </label>
                     </td>
                 </tr>
