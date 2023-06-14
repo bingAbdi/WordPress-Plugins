@@ -1,3 +1,5 @@
+<php 
+    
 /*
 Plugin Name: EmageOptimize 
 Description: High-quality image resizing plugin with customization options, watermarking, and support for retina displays.
@@ -69,3 +71,65 @@ function emage_render_settings_page() {
         $emage_option = isset($_POST['emage_option']) ? sanitize_text_field($_POST['emage_option']) : '';
         $emage_format = isset($_POST['emage_format']) ? sanitize_text_field($_POST['emage_format']) : '';
         $emage_compression = isset($_POST['emage_compression']) ? absint($_POST['emage_compression']) : 
+
+90; // Default compression level
+        $emage_aspect_ratio_lock = isset($_POST['emage_aspect_ratio_lock']) && $_POST['emage_aspect_ratio_lock'] === '1' ? 1 : 0;
+        $emage_watermark_image = isset($_POST['emage_watermark_image']) ? sanitize_text_field($_POST['emage_watermark_image']) : '';
+        $emage_watermark_position = isset($_POST['emage_watermark_position']) ? sanitize_text_field($_POST['emage_watermark_position']) : 'bottom-right';
+        $emage_watermark_opacity = isset($_POST['emage_watermark_opacity']) ? absint($_POST['emage_watermark_opacity']) : 50; // Default opacity
+        switch ($emage_option) {
+            // Handle the resize options
+        }
+        update_option('emage_width_ratio', $width_ratio);
+        update_option('emage_height_ratio', $height_ratio);
+        update_option('emage_format', $emage_format);
+        update_option('emage_compression', $emage_compression);
+        update_option('emage_aspect_ratio_lock', $emage_aspect_ratio_lock);
+        update_option('emage_watermark_image', $emage_watermark_image);
+        update_option('emage_watermark_position', $emage_watermark_position);
+        update_option('emage_watermark_opacity', $emage_watermark_opacity);
+    }
+
+    // Retrieve the saved settings
+    $width_ratio = get_option('emage_width_ratio', 1.2);
+    $height_ratio = get_option('emage_height_ratio', 1.1);
+    $emage_format = get_option('emage_format', 'jpeg');
+    $emage_compression = get_option('emage_compression', 90);
+    $emage_aspect_ratio_lock = get_option('emage_aspect_ratio_lock', 0);
+    $emage_watermark_image = get_option('emage_watermark_image', '');
+    $emage_watermark_position = get_option('emage_watermark_position', 'bottom-right');
+    $emage_watermark_opacity = get_option('emage_watermark_opacity', 50);
+
+    // Render the settings page HTML
+    ?>
+    <div class="wrap">
+        <h1>Emage Settings</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            <table class="form-table">
+                <tr>
+                    <th scope="row">Image Resize Option</th>
+                    <td>
+                        <!-- Render resize options -->
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Image Format</th>
+                    <td>
+                        <select name="emage_format">
+                            <option value="jpeg"<?php selected($emage_format, 'jpeg'); ?>>JPEG</option>
+                            <option value="png"<?php selected($emage_format, 'png'); ?>>PNG</option>
+                            <option value="gif"<?php selected($emage_format, 'gif'); ?>>GIF</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Compression Level</th>
+                    <td>
+                        <input type="range" name="emage_compression" min="1" max="100" value="<?php echo $emage_compression; ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Lock Aspect Ratio</th>
+                    <td>
+                        <label for="emage_aspect_ratio_lock">
+                            <input type="checkbox" name="emage
